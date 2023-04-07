@@ -35,6 +35,10 @@ public class App {
  
        printGameBoard(gameBoard);
 
+       String result = checkWinner();
+
+       System.out.println(result);
+
        }    
     }
 }
@@ -53,8 +57,10 @@ public static void placePoint(char[][] gameBoard, int position, String user){
 
     if(user.equals("player")){
         symbol = 'X';
+        playerPositions.add(position);
     }else if(user.equals("cpu")){
         symbol ='O';
+        cpuPositions.add(position);
     }
 
 
@@ -101,6 +107,28 @@ public static String checkWinner() {
 
     List cross1 = Arrays.asList(1, 5, 9);
     List cross2 = Arrays.asList(7, 5, 3);
+
+    List<List> winning = new ArrayList<List>();
+    winning.add(topRow);
+    winning.add(midRow);
+    winning.add(botRow);
+    winning.add(leftCol);
+    winning.add(midCol);
+    winning.add(rightCol);
+    winning.add(cross1);
+    winning.add(cross2);
+
+    for(List l : winning){
+        if(playerPositions.containsAll(l)){
+            return "Congratulations You Won";
+        }
+     else if(cpuPositions.containsAll(l)){
+        return "CPU Wins!";
+    }else if(playerPositions.size() + cpuPositions.size() == 9){
+        return " DRAW";
+    }
+}
+
 
 
 
