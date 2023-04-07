@@ -12,10 +12,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         char[][] gameBoard = {{' ', '|', ' ', '|', ' '},
-        {'-', '+', '-', '+', '-'},
-        {' ', '|', ' ', '|', ' '},
-        {'-', '+', '-', '+', '-'},
-        {' ', '|', ' ', '|', ' '}};
+                    {'-', '+', '-', '+', '-'},
+                    {' ', '|', ' ', '|', ' '},
+                    {'-', '+', '-', '+', '-'},
+                    {' ', '|', ' ', '|', ' '}};
 
 
        
@@ -24,24 +24,42 @@ public class App {
 
        while(true){
        System.out.println("Eneter your placement (1-9)");
-       int position = scan.nextInt();
+       int playerPos = scan.nextInt();
 
-       System.out.println(position);
+       while(playerPositions.contains(playerPos) || cpuPositions.contains(playerPos)){
+           System.out.println("Position taken!!");
+           playerPos = scan.nextInt();
+       }
 
-       placePoint(gameBoard, position, "player");
+    
+
+    
+    placePoint(gameBoard, playerPos, "player");
+
+       String result = checkWinner();
+       if(result.length() > 0){
+           System.out.println(result);
+       }
+
        Random rand = new Random();
-       int cpuPosition = rand.nextInt(9) + 1;
-       placePoint(gameBoard, position, "cpu");
+       int cpuPos = rand.nextInt(9) + 1;
+       while(playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)){
+        cpuPos = rand.nextInt(9) + 1;
+    }
+       placePoint(gameBoard, cpuPos, "cpu");
  
        printGameBoard(gameBoard);
 
-       String result = checkWinner();
-
-       System.out.println(result);
+       result = checkWinner();
+       if(result.length() > 0){
+           System.out.println(result);
+           break;
+       }
+    }
 
        }    
-    }
-}
+    
+
 
 public static void printGameBoard(char[][] gameBoard){
     for(char[] row : gameBoard){
@@ -51,20 +69,20 @@ public static void printGameBoard(char[][] gameBoard){
     System.out.println();
 }
 
-public static void placePoint(char[][] gameBoard, int position, String user){
+public static void placePoint(char[][] gameBoard, int pos, String user){
 
-    char symbol = 'X';
+    char symbol = ' ';
 
     if(user.equals("player")){
         symbol = 'X';
-        playerPositions.add(position);
+        playerPositions.add(pos);
     }else if(user.equals("cpu")){
         symbol ='O';
-        cpuPositions.add(position);
+        cpuPositions.add(pos);
     }
 
 
-    switch(position){
+    switch(pos){
         case 1:
         gameBoard[0][0] = symbol;
         break;
@@ -91,6 +109,8 @@ public static void placePoint(char[][] gameBoard, int position, String user){
         break;
         case 9:
         gameBoard[4][4] = symbol;
+        break;
+        default:
         break;
     }
 }
