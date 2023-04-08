@@ -12,10 +12,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         char[][] gameBoard = {{' ', '|', ' ', '|', ' '},
-                    {'-', '+', '-', '+', '-'},
-                    {' ', '|', ' ', '|', ' '},
-                    {'-', '+', '-', '+', '-'},
-                    {' ', '|', ' ', '|', ' '}};
+                        {'-', '+', '-', '+', '-'},
+                        {' ', '|', ' ', '|', ' '},
+                        {'-', '+', '-', '+', '-'},
+                        {' ', '|', ' ', '|', ' '}};
 
 
        
@@ -30,11 +30,8 @@ public class App {
            System.out.println("Position taken!!");
            playerPos = scan.nextInt();
        }
-
     
-
-    
-    placePoint(gameBoard, playerPos, "player");
+        placePoint(gameBoard, playerPos, "player");
 
        String result = checkWinner();
        if(result.length() > 0){
@@ -57,16 +54,18 @@ public class App {
        }
     }
 
-       }    
+    }
     
 
 
 public static void printGameBoard(char[][] gameBoard){
     for(char[] row : gameBoard){
         for(char c : row){
-            System.out.println(c);            }
+            System.out.println(c);            
+        }
+        System.out.println();
     }
-    System.out.println();
+    
 }
 
 public static void placePoint(char[][] gameBoard, int pos, String user){
