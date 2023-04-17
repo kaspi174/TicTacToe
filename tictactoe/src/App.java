@@ -18,8 +18,6 @@ public class App {
                         {' ', '|', ' ', '|', ' '}};
 
 
-       
-
        Scanner scan = new Scanner(System.in);
 
        while(true){
